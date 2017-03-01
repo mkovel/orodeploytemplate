@@ -9,7 +9,6 @@ Use:
 
 ##  ORO GITHUB REPOSITORIES
 ```
-orocrm/platform-application
 - APP_VERSION="2.0.2"
 - APP_REPOSITORY="https://github.com/orocrm/platform-application"
 ```
