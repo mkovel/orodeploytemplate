@@ -4,6 +4,8 @@ Use:
 
 1. Set uniq container prefix for your poject in file .env COMPOSE_PROJECT_NAME=""
 2. Set value for your APP_VERSION and APP_REPOSITORY environment variables in docker-compose.yml 
+3. For install use `./install.sh` or run use `docker-compose up -d`
+
 
 ##  ORO GITHUB REPOSITORIES
 ```
