@@ -26,7 +26,7 @@ services:
 
     php:
         build:
-          context: build/php-fpm
+          context: docker-build/php-fpm
         links:
             - mysqldb
         volumes:
