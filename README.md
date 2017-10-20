@@ -47,7 +47,6 @@ APP_BRANCH="1.0"
 ### Description of .etc variables 
 
 * `COMPOSE_PROJECT_NAME=proj1` - if you already use the same, change `proj1` to a different docker project name 
-
 * `MYSQL_HOST=db` - name of mysql docker service(container) 
 * `MYSQL_PORT=3306` - mysql port
 * `MYSQL_DATABASE=prj_db` - database name  
@@ -56,19 +55,15 @@ APP_BRANCH="1.0"
 * `MYSQL_ROOT_HOST=%` - user pass 
 * `MYSQL_ALLOW_EMPTY_PASSWORD=yes` -  
 * `MYSQL_ROOT_PASSWORD=root` -  
-
 * `APP_ROOT=/var/www/site` - internal application location
 * `CHECK_READY_DELAY=120` -
 * `CHECK_READY_HOST=https://nginx` -
-
 * `COMPOSER_HOME=/var/www/.composer` -
 * `APP_SESSION_HANDLER=snc_redis.session.handler` - Symfony session handler
-
 * `REDIS_PASS=redis` -
 * `REDIS_SESSION=redis://redis@redis:6379/1` -
 * `REDIS_DOCTRINE=redis://redis@redis:6379/2` -
 * `REDIS_TTL=600` -
-
 * `APP_MAILER_TRANSPORT=smtp` -
 * `APP_MAILER_PORT=465` -
 * `APP_MAILER_ENCRYPTION=ssl` -
