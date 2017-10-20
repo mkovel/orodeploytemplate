@@ -11,6 +11,7 @@ Universal, ready-to-use, fully functional `docker-compose` template for quick un
 ### Preparation 
 1. Select oro application repo from - [ORO repositories](#ORO repositories) and clone one of them to ./source_code
 ```
+rm ./source_code/.gitkeep
 git clone  --single-branch --depth 3 -b 2.4.2 https://github.com/orocrm/platform-application ./source_code
 ```
 2. Copy .env_dist to .env and set up value for variables. See [Description of .etc variables](#Description-of-.etc-variables) for clarification

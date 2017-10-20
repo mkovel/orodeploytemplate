@@ -22,8 +22,7 @@ php app/console oro:install \
   --user-firstname AdminF \
   --user-lastname AdminL \
   --sample-data y \
-  --force \
-  -v  \
+  -v
 
 php app/console oro:api:doc:cache:clear
 
