@@ -1,18 +1,17 @@
-FROM debian:jessie
+FROM nginx:stable
 
-RUN apt-get update && apt-get install -y \
-    nginx
+ADD ssl/nginx.crt /etc/nginx/nginx.crt
+ADD ssl/nginx.key /etc/nginx/nginx.key
 
-ADD nginx.conf /etc/nginx/
-ADD sites-available/* /etc/nginx/sites-available/
+ADD nginx.conf /etc/nginx/nginx.conf
+ADD sites-enabled/* /etc/nginx/sites-enabled/
+RUN rm /etc/nginx/conf.d/default.conf
 
-RUN ln -s /etc/nginx/sites-available/*.conf /etc/nginx/sites-enabled/
-RUN rm /etc/nginx/sites-enabled/default
-
-RUN echo "upstream php-upstream { server php:9000; }" > /etc/nginx/conf.d/upstream.conf
-
-RUN usermod -u 1000 www-data
-
-#clear apt-get list
 RUN rm -rf /var/lib/apt/lists/*
-CMD ["nginx"]
+
+# forward request and error logs to docker log collector
+RUN ln -sf /dev/stdout /var/log/nginx/access.log \
+	&& ln -sf /dev/stderr /var/log/nginx/error.log
+
+
+

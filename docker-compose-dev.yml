@@ -1,0 +1,113 @@
+version: '2'
+
+services:
+  db:
+    build: ./docker-build/mysql
+    volumes:
+      - ./dynamic-data/mysql:/var/lib/mysql
+#      - ./log/mysql:/var/log/mysql
+    environment:
+#      - MYSQL_ROOT_PASSWORD
+      - MYSQL_ROOT_HOST
+      - MYSQL_ALLOW_EMPTY_PASSWORD
+      - MYSQL_DATABASE
+      - MYSQL_USER
+      - MYSQL_PASSWORD
+    ports:
+      - "3307:3306"
+
+  appdata:
+    build:
+      context: .
+      args:
+        - APP_ROOT
+    volumes:
+      - /var/www/site
+      - ./dynamic-data/site/.composer:/var/www/.composer
+      - ./source_code:/var/www/site
+
+  nginx:
+    build: ./docker-build/nginx
+    ports:
+      - "81:80"
+      - "444:443"
+    volumes:
+      - ./log/nginx:/var/log/nginx
+    volumes_from:
+      - appdata
+
+  redis:
+    image: redis:alpine
+    command: redis-server --requirepass ${REDIS_PASS}
+    restart: always
+    ports:
+      - "6380:6379"
+
+  php:
+    build:
+      context: ./docker-build/php-fpm
+      args:
+        - APP_ENV=dev
+    depends_on:
+      - appdata
+    volumes_from:
+      - appdata
+    environment:
+      - APP_REPOSITORY
+      - APP_ROOT
+      - APP_BRANCH
+      - APP_SOURCE_PATH
+      - APP_REINSTALL
+      - COMPOSER_USE
+      - COMPOSER_HOME
+      - SYMFONY_ENV=dev
+      - SYMFONY__MYSQL_HOST=${MYSQL_HOST}
+      - SYMFONY__MYSQL_PORT=${MYSQL_PORT}
+      - SYMFONY__MYSQL_DATABASE=${MYSQL_DATABASE}
+      - SYMFONY__MYSQL_USER=${MYSQL_USER}
+      - SYMFONY__MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - SYMFONY__REDIS_CACHE=${REDIS_CACHE}
+      - SYMFONY__REDIS_SESSION=${REDIS_SESSION}
+      - SYMFONY__REDIS_DOCTRINE=${REDIS_DOCTRINE}
+      - SYMFONY__REDIS_TTL=${REDIS_TTL}
+      - SYMFONY__APP_SESSION_HANDLER=${APP_SESSION_HANDLER}
+      - SYMFONY__APP_MAILER_TRANSPORT=${APP_MAILER_TRANSPORT}
+      - SYMFONY__APP_MAILER_HOST=${APP_MAILER_HOST}
+      - SYMFONY__APP_MAILER_PORT=${APP_MAILER_PORT}
+      - SYMFONY__APP_MAILER_ENCRYPTION=${APP_MAILER_ENCRYPTION}
+      - SYMFONY__APP_MAILER_USER=${APP_MAILER_USER}
+      - SYMFONY__APP_MAILER_PASSWORD=${APP_MAILER_PASSWORD}
+      - SYMFONY__APP_RECAPTCHA_PUBLIC_KEY=${RECAPTCHA_PUBLIC_KEY}
+      - SYMFONY__APP_RECAPTCHA_PRIVATE_KEY=${RECAPTCHA_PRIVATE_KEY}
+
+  bgtasks:
+    build:
+      context: ./docker-build/bgtasks
+      args:
+        - APP_ENV=dev
+    restart: always
+    volumes_from:
+      - appdata
+    environment:
+      - APP_ROOT
+      - CHECK_READY_DELAY
+      - CHECK_READY_HOST
+      - SYMFONY_ENV=dev
+      - SYMFONY__MYSQL_HOST=${MYSQL_HOST}
+      - SYMFONY__MYSQL_PORT=${MYSQL_PORT}
+      - SYMFONY__MYSQL_DATABASE=${MYSQL_DATABASE}
+      - SYMFONY__MYSQL_USER=${MYSQL_USER}
+      - SYMFONY__MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - SYMFONY__REDIS_CACHE=${REDIS_CACHE}
+      - SYMFONY__REDIS_SESSION=${REDIS_SESSION}
+      - SYMFONY__REDIS_DOCTRINE=${REDIS_DOCTRINE}
+      - SYMFONY__REDIS_TTL=${REDIS_TTL}
+      - SYMFONY__APP_SESSION_HANDLER=${APP_SESSION_HANDLER}
+      - SYMFONY__APP_MAILER_TRANSPORT=${APP_MAILER_TRANSPORT}
+      - SYMFONY__APP_MAILER_HOST=${APP_MAILER_HOST}
+      - SYMFONY__APP_MAILER_PORT=${APP_MAILER_PORT}
+      - SYMFONY__APP_MAILER_ENCRYPTION=${APP_MAILER_ENCRYPTION}
+      - SYMFONY__APP_MAILER_USER=${APP_MAILER_USER}
+      - SYMFONY__APP_MAILER_PASSWORD=${APP_MAILER_PASSWORD}
+      - SYMFONY__APP_RECAPTCHA_PUBLIC_KEY=${RECAPTCHA_PUBLIC_KEY}
+      - SYMFONY__APP_RECAPTCHA_PRIVATE_KEY=${RECAPTCHA_PRIVATE_KEY}

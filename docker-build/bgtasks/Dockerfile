@@ -1,4 +1,4 @@
-FROM php:7.1-fpm
+FROM php:7.1
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     libicu-dev \
@@ -10,14 +10,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libtidy-dev \
     mc \
     netcat-openbsd \
-    httping\
+    httping \
     npm \
-    git \
-    curl \
-    xvfb \
-    libfontconfig \
-    wkhtmltopdf \
-    xauth
+    cron 
 
 RUN docker-php-ext-install \
     intl \
@@ -53,26 +48,24 @@ RUN docker-php-ext-enable \
   redis \
   apcu
 
-RUN ln -s /usr/bin/nodejs /usr/bin/node && \
-    npm install -g grunt-cli bower
-
+RUN apt-get install -y supervisor
+# install last version
+#RUN apt install python-pip -y
+#RUN pip install --upgrade pip
+#RUN pip install --upgrade supervisor
+#CMD ["/usr/local/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf" ]
 
 RUN rm -rf /var/lib/apt/lists/*
 
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-
-COPY php.ini                 /usr/local/etc/php/
-COPY www.conf                /usr/local/etc/php-fpm.d/www.conf
-COPY docker-entrypoint.sh    /usr/local/bin/
-COPY docker-entrypoint-parts /usr/local/bin/
+COPY php.ini               /usr/local/etc/php/
+COPY docker-entrypoint.sh  /usr/local/bin/
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 WORKDIR /var/www/site
 
 ENTRYPOINT ["docker-entrypoint.sh"]
 # CMD override important for current docker-entrypoint.sh content
 # fix error:  $1: unbound variable
-CMD ["php-fpm"]
+#CMD ["php-fpm"]
 
-# supervisord
-#ADD docker-build/php-fpm/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-#CMD ["/usr/bin/supervisord"]
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf" ]

@@ -1,0 +1,4 @@
+*
+!docker-build/
+!source_code/
+!buildFront/

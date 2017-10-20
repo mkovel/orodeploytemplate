@@ -1,3 +1,6 @@
 .idea
-dynamic-data
-source-code 
+.env
+deploy/.env
+source_code/*
+dynamic-data/*
+log/*
