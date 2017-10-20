@@ -2,10 +2,11 @@
 Universal, ready-to-use, fully functional `docker-compose` template for quick unfolding of different ORO platform / crm / commerce applications 
 
 
-- [Preparation](#Preparation)
-- [Use `development`](#Use-in-development)
-- [ORO repositories](#ORO-repositories)
-- [Description of .etc variables](#Description-of-.etc-variables)
+- [Preparation](#preparation)
+- [Use `development`](#use-development)
+- [Use `production`](#use-production)
+- [ORO repositories](#oro-application-repositories)
+- [Description of .etc variables](#description-of-etc-variables)
 
 ### Preparation 
 1. Select oro application repo from - [ORO repositories](#ORO repositories) and clone it to ./source_code  
@@ -28,7 +29,7 @@ docker-compose -f docker-compose-dev.yml up -d
 ```
 
 
-#### ORO application repositories
+### ORO application repositories
 ```
 #OroPlarform application
 APP_REPOSITORY="https://github.com/orocrm/platform-application"
@@ -43,7 +44,7 @@ APP_REPOSITORY="https://github.com/orocommerce/orocommerce-application.git"
 APP_BRANCH="1.0"
 ```
 
-#### Description of .etc variables 
+### Description of .etc variables 
 
 * `COMPOSE_PROJECT_NAME=proj1` - if you already use the same, change `proj1` to a different docker project name 
 
