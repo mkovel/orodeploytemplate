@@ -9,7 +9,10 @@ Universal, ready-to-use, fully functional `docker-compose` template for quick un
 - [Description of .etc variables](#description-of-etc-variables)
 
 ### Preparation 
-1. Select oro application repo from - [ORO repositories](#ORO repositories) and clone it to ./source_code  
+1. Select oro application repo from - [ORO repositories](#ORO repositories) and clone one of them to ./source_code
+```
+git clone  --single-branch --depth 3 -b 2.4.2 https://github.com/orocrm/platform-application ./source_code
+```
 2. Copy .env_dist to .env and set up value for variables. See [Description of .etc variables](#Description-of-.etc-variables) for clarification   
 
 ### Use `development`
