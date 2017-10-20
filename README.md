@@ -13,7 +13,8 @@ Universal, ready-to-use, fully functional `docker-compose` template for quick un
 ```
 git clone  --single-branch --depth 3 -b 2.4.2 https://github.com/orocrm/platform-application ./source_code
 ```
-2. Copy .env_dist to .env and set up value for variables. See [Description of .etc variables](#Description-of-.etc-variables) for clarification   
+2. Copy .env_dist to .env and set up value for variables. See [Description of .etc variables](#Description-of-.etc-variables) for clarification
+3. Fill in your GITHUB Personal access tokens for COMPOSER_GITHUB_TOKEN   
 
 ### Use `development`
 ```
@@ -62,6 +63,7 @@ APP_BRANCH="1.0"
 * `CHECK_READY_DELAY=120` -
 * `CHECK_READY_HOST=https://nginx` -
 * `COMPOSER_HOME=/var/www/.composer` -
+* `COMPOSER_GITHUB_TOKEN=2504e51765223e2969d18b77bf526be670f76531` -
 * `APP_SESSION_HANDLER=snc_redis.session.handler` - Symfony session handler
 * `REDIS_PASS=redis` -
 * `REDIS_SESSION=redis://redis@redis:6379/1` -

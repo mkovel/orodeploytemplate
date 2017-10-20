@@ -6,7 +6,7 @@ function info {
 ################################
 
 info "composer install"
-composer config --global github-oauth.github.com 2504e51765223e2969d18b77bf526be670f76531
+composer config --global github-oauth.github.com $COMPOSER_GITHUB_TOKEN
 composer global require "fxp/composer-asset-plugin:dev-master"
 composer global require hirak/prestissimo
 composer install --prefer-dist --no-dev --no-interaction --working-dir=$APP_ROOT
