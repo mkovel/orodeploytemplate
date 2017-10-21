@@ -52,12 +52,13 @@ RUN docker-php-ext-enable \
   redis \
   apcu
 
-RUN curl -fsS -o /tmp/icu.tgz -L http://download.icu-project.org/files/icu4c/59.1/icu4c-59_1-src.tgz \
-  && tar -zxf /tmp/icu.tgz -C /tmp \
+RUN curl -sS -o /tmp/icu.tar.gz -L http://download.icu-project.org/files/icu4c/57.1/icu4c-57_1-src.tgz \
+#RUN curl -sS -o /tmp/icu.tar.gz -L http://download.icu-project.org/files/icu4c/59.1/icu4c-59_1-src.tgz \
+  && tar -zxf /tmp/icu.tar.gz -C /tmp \
   && cd /tmp/icu/source \
   && ./configure --prefix=/usr/local \
   && make \
-  && make install \
+  && make install
 # just to be certain things are cleaned up
   && rm -rf /tmp/icu*
 
