@@ -5,6 +5,18 @@ function info {
 }
 ################################
 
+params_yml="app/config/parameters.yml"
+params_dist_yml="app/config/parameters.yml.dist"
+if [ ! -f $params_yml ];
+then
+cat $params_dist_yml
+  info "rewrite DB permissions in app/config/parameters.yml"
+  sed -i -e 's|database_host:.*|database_host: '$SYMFONY__MYSQL_HOST'|g' $params_dist_yml
+  sed -i -e 's|database_name:.*|database_name: '$SYMFONY__MYSQL_DATABASE'|g' $params_dist_yml
+  sed -i -e 's|database_user:.*|database_user: '$SYMFONY__MYSQL_USER'|g' $params_dist_yml
+  sed -i -e 's|database_password:.*|database_password: '$SYMFONY__MYSQL_PASSWORD'|g' $params_dist_yml
+fi
+
 info "composer install"
 composer config --global github-oauth.github.com $COMPOSER_GITHUB_TOKEN
 composer global require "fxp/composer-asset-plugin:dev-master"
@@ -15,14 +27,15 @@ info "php app/console oro:install"
 php app/console oro:install \
   --drop-database \
   --application-url http://oro/ \
-  --organization-name 'default' \
+  --organization-name 'Organization' \
   --user-name admin \
   --user-password admin \
-  --user-email admin@ttt.t \
+  --user-email admin@example.com \
   --user-firstname AdminF \
   --user-lastname AdminL \
   --sample-data y \
-  -v
+  --timeout 10000 \
+  -vv \
 
 php app/console oro:api:doc:cache:clear
 
