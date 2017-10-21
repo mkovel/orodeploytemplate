@@ -52,21 +52,19 @@ RUN docker-php-ext-enable \
   redis \
   apcu
 
-RUN curl -sS -o /tmp/icu.tar.gz -L http://download.icu-project.org/files/icu4c/57.1/icu4c-57_1-src.tgz \
 #RUN curl -sS -o /tmp/icu.tar.gz -L http://download.icu-project.org/files/icu4c/59.1/icu4c-59_1-src.tgz \
+RUN curl -sS -o /tmp/icu.tar.gz -L http://download.icu-project.org/files/icu4c/57.1/icu4c-57_1-src.tgz \
   && tar -zxf /tmp/icu.tar.gz -C /tmp \
   && cd /tmp/icu/source \
   && ./configure --prefix=/usr/local \
   && make \
   && make install \
-# just to be certain things are cleaned up
   && rm -rf /tmp/icu*
 
 # PHP_CPPFLAGS are used by the docker-php-ext-* scripts
 ENV PHP_CPPFLAGS="$PHP_CPPFLAGS -std=c++11"
 
 RUN docker-php-ext-configure intl --with-icu-dir=/usr/local \
-# run configure and install in the same RUN line, they extract and clean up the php source to save space
   && docker-php-ext-install intl
 
 RUN rm -rf /var/lib/apt/lists/*

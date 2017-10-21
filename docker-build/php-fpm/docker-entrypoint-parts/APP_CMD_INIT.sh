@@ -9,7 +9,6 @@ params_yml="app/config/parameters.yml"
 params_dist_yml="app/config/parameters.yml.dist"
 if [ ! -f $params_yml ];
 then
-cat $params_dist_yml
   info "rewrite DB permissions in app/config/parameters.yml"
   sed -i -e 's|database_host:.*|database_host: '$SYMFONY__MYSQL_HOST'|g' $params_dist_yml
   sed -i -e 's|database_name:.*|database_name: '$SYMFONY__MYSQL_DATABASE'|g' $params_dist_yml
