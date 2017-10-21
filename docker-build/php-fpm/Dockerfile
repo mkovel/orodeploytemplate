@@ -58,7 +58,7 @@ RUN curl -sS -o /tmp/icu.tar.gz -L http://download.icu-project.org/files/icu4c/5
   && cd /tmp/icu/source \
   && ./configure --prefix=/usr/local \
   && make \
-  && make install
+  && make install \
 # just to be certain things are cleaned up
   && rm -rf /tmp/icu*
 
