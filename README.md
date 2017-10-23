@@ -28,6 +28,11 @@ docker-compose -f docker-compose-dev.yml down
 ##update yours source code in ./source_code
 docker-compose -f docker-compose-dev.yml up -d
 ```
+
+Urls for checking
+- http://localhost:81
+- https://localhost:444
+      
 ### Use `production`
 ``` 
 ### in plans
