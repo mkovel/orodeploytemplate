@@ -11,7 +11,7 @@ Universal, ready-to-use, fully functional `docker-compose` template for quick un
 ### Preparation
 1. Clone this repo
 ```
-git clone --depth 3 git@github.com:mkovel/orodeploytemplate.git
+git clone --depth 3 https://github.com/mkovel/orodeploytemplate.git
 cd orodeploytemplate
 ```
 2. Select oro application repo from - [ORO repositories](#ORO repositories) and clone one of them to ./source_code

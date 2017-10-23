@@ -16,6 +16,9 @@ then
   sed -i -e 's|database_password:.*|database_password: '$SYMFONY__MYSQL_PASSWORD'|g' $params_dist_yml
 fi
 
+#Disable xdebug
+mv /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini /usr/local/etc/php/conf.d/docker-php-ext-xdebug._ini_
+
 info "composer install"
 composer config --global github-oauth.github.com $COMPOSER_GITHUB_TOKEN
 composer global require "fxp/composer-asset-plugin:dev-master"
@@ -40,3 +43,6 @@ php app/console oro:api:doc:cache:clear
 
 info "Application was initiated correctly $APP_IS_INITIATED"
 touch $APP_IS_INITIATED
+
+#Enable xdebug
+mv /usr/local/etc/php/conf.d/docker-php-ext-xdebug._ini_ /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
