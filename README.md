@@ -8,14 +8,21 @@ Universal, ready-to-use, fully functional `docker-compose` template for quick un
 - [ORO repositories](#oro-application-repositories)
 - [Description of .etc variables](#description-of-etc-variables)
 
-### Preparation 
-1. Select oro application repo from - [ORO repositories](#ORO repositories) and clone one of them to ./source_code
+### Preparation
+1. Clone this repo
+```
+git clone --depth 3 git@github.com:mkovel/orodeploytemplate.git
+cd orodeploytemplate
+```
+2. Select oro application repo from - [ORO repositories](#ORO repositories) and clone one of them to ./source_code
 ```
 rm ./source_code/.gitkeep
-git clone  --single-branch --depth 3 -b 2.4.2 https://github.com/orocrm/platform-application ./source_code
+git clone  --single-branch --depth 3 https://github.com/orocrm/platform-application ./source_code
+git checkout -b 2.4.2
 ```
-2. Copy .env_dist to .env and set up value for variables. See [Description of .etc variables](#Description-of-.etc-variables) for clarification
-3. Fill in your GITHUB Personal access tokens for COMPOSER_GITHUB_TOKEN   
+3. Copy .env_dist to .env and set up value for variables. See [Description of .etc variables](#description-of-etc-variables) for clarification
+4. In .env setup your GITHUB Personal access tokens for COMPOSER_GITHUB_TOKEN
+https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/   
 
 ### Use `development`
 ```
@@ -29,8 +36,7 @@ docker-compose -f docker-compose-dev.yml down
 docker-compose -f docker-compose-dev.yml up -d
 ```
 
-Urls for checking
-- http://localhost:81
+Url for checking
 - https://localhost:444
       
 ### Use `production`
