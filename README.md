@@ -21,7 +21,7 @@ git clone  --single-branch --depth 3 https://github.com/orocrm/platform-applicat
 git checkout -b 2.4.2
 ```
 3. Copy .env_dist to .env and set up value for variables. See [Description of .etc variables](#description-of-etc-variables) for clarification
-4. In .env setup your GITHUB Personal access tokens for COMPOSER_GITHUB_TOKEN
+4. Fill in your GITHUB Personal access tokens. Use COMPOSER_GITHUB_TOKEN variable in file **.env** 
 https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/   
 
 ### Use `development`
