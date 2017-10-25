@@ -25,19 +25,20 @@ git checkout -b 2.4.2
 https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/   
 
 ### Use `development`
+run/install application
 ```
-#run/install application
 docker-compose -f docker-compose-dev.yml build
 docker-compose -f docker-compose-dev.yml up -d
-
-#updating application
+```
+updating application
+```
 docker-compose -f docker-compose-dev.yml down
 ##update yours source code in ./source_code
 docker-compose -f docker-compose-dev.yml up -d
 ```
 
 Url for checking
-- https://localhost:444
+https://localhost:444
 
 ```
 login:admin
