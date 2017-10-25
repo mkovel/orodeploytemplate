@@ -38,6 +38,8 @@ docker-compose -f docker-compose-dev.yml up -d
 
 Url for checking
 - https://localhost:444
+login:admin
+pass:admin
       
 ### Use `production`
 ``` 
