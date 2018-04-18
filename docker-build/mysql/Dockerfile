@@ -1,4 +1,6 @@
 FROM mysql:latest
+#FROM jbergstroem/mariadb-alpine:10.1.28
+#FROM bianjp/mariadb-alpine:latest
 
 RUN rm -rf /var/lib/apt/lists/*
 RUN printf "[mysqld]\nmax_allowed_packet=64M\n" >> /etc/mysql/my.cnf

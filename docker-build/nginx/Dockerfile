@@ -1,4 +1,5 @@
 FROM nginx:stable
+#FROM nginx:1.13-alpine
 
 ADD ssl/nginx.crt /etc/nginx/nginx.crt
 ADD ssl/nginx.key /etc/nginx/nginx.key
