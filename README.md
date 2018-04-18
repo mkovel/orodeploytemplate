@@ -10,14 +10,14 @@ Universal, ready-to-use, fully functional `docker-compose` template for quick un
 
 ### Preparation
 1. Clone this repo
-```
-git clone --depth 3 https://github.com/mkovel/orodeploytemplate.git
+```bash
+git clone https://github.com/mkovel/orodeploytemplate.git
 cd orodeploytemplate
 ```
 2. Select oro application repo from - [ORO repositories](#oro-application-repositories) and clone one of them to ./source_code
-```
+```bash
 rm ./source_code/.gitkeep
-git clone  --single-branch --depth 3 https://github.com/orocrm/platform-application ./source_code
+git clone https://github.com/orocrm/platform-application ./source_code
 git checkout -b 2.4.2
 ```
 3. Copy .env_dist to .env and set up value for variables. See [Description of .etc variables](#description-of-etc-variables) for clarification
@@ -93,3 +93,16 @@ APP_BRANCH="1.0"
 * `APP_MAILER_HOST=smtp.gmail.com` -
 * `APP_MAILER_USER=test@gmail.com` -
 * `APP_MAILER_PASSWORD=testpass` -
+
+
+### Docker on Windows
+If you try run it on Windows, you must checkout source code with LF line separator. 
+
+```bash
+git clone https://github.com/mkovel/orodeploytemplate.git
+cd orodeploytemplate
+git config core.autocrlf false
+git config core.eol lf
+git rm --cached -rf .
+git reset --hard
+```
