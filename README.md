@@ -1,6 +1,7 @@
 # Oro application docker-compose template
 Universal, ready-to-use, fully functional `docker-compose` template for quick unfolding of different ORO platform / crm / commerce applications 
 
+>This repo is no longer maintained. sorry 
 
 - [Preparation](#preparation)
 - [Use `development`](#use-development)
